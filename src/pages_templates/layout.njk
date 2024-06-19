@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <title><% if page_title != '' %>[[ page_title ]] | <% endif %>web title</title>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, user-scalable=no" />
+
+        <meta name="theme-color" content="#ffffff" />
+        <meta name="apple-mobile-web-app-status-bar-style" content="#ffffff" />
+        <!-- <link rel="shortcut icon" href="./h5icon.ico" /> -->
+
+        <meta name="keywords" content="" />
+        <meta name="description" content="" />
+        <meta name="robots" content="noindex,nofollow" />
+        <!-- 讓手機不判斷它是電話號碼變顏色-->
+        <meta name="format-detection" content="telephone=no" />
+
+        <link rel="stylesheet" href="./assets/plugin/swiper@11.1.1/swiper-bundle.min.css" />
+        <% if VERSION != '' %>
+        <link rel="stylesheet" href="[[ CSS_PATH ]]style.css?v=[[ VERSION ]]" />
+        <% else %>
+        <link rel="stylesheet" href="[[ CSS_PATH ]]style.css" />
+        <% endif %>
+
+        <% block head_script %><% endblock %>
+    </head>
+
+    <body class="">
+        <!-- ========================================================================= -->
+        <!-- .body_wrap  START-->
+        <div class="body_wrap" id="app">
+            <% include 'header.njk' %>
+            <% block content %><% endblock %>
+        </div>
+        <!-- /.body_wrap  END  !!-->
+        <!-- =========================================================================-->
+
+        <script src="./assets/plugin/lodash@4.17.21/lodash.min.js"></script>
+        <script src="./assets/plugin/gsap@3.12.5/gsap.min.js"></script>
+        <script src="./assets/plugin/swiper@11.1.1/swiper-bundle.min.js"></script>
+        <script src="./assets/vue@3.4.27/vue.global.prod.js"></script>
+        <script>
+            const {ref, reactive, createApp, onBeforeMount, onMounted, onUnmounted, watchEffect, watch, nextTick} = Vue;
+        </script>
+        <script src="[[JS_PATH]]components/TwImg.js"></script>
+        <script src="[[JS_PATH]]components/TwBtn.js"></script>
+
+        <script src="[[JS_PATH]]main.js?v=[[VERSION]]"></script>
+        <% block page_script %><% endblock %>
+    </body>
+</html>

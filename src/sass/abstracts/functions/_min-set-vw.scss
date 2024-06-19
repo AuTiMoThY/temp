@@ -1,0 +1,3 @@
+@function min-set-vw($num) {
+    @return min(set-vw($num), #{$num}px);
+}

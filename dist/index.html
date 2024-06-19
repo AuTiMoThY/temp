@@ -1,0 +1,506 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <title>NO钱包福利站 | 皇冠 CROWN 154.COM</title>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, user-scalable=no" />
+
+        <meta name="theme-color" content="#ffffff" />
+        <meta name="apple-mobile-web-app-status-bar-style" content="#ffffff" />
+        <!-- <link rel="shortcut icon" href="./h5icon.ico" /> -->
+
+        <meta name="keywords" content="" />
+        <meta name="description" content="" />
+        <meta name="robots" content="noindex,nofollow" />
+        <!-- 讓手機不判斷它是電話號碼變顏色-->
+        <meta name="format-detection" content="telephone=no" />
+
+        <link rel="stylesheet" href="./assets/plugin/swiper@11.1.1/swiper-bundle.min.css" />
+        <link rel="stylesheet" href="./assets/css/style.css?v=" />
+    </head>
+
+    <body class="">
+        <!-- ========================================================================= -->
+        <!-- .body_wrap  START-->
+        <div class="body_wrap" id="app">
+            <header class="site_header" ref="headerMain">
+                <div class="container">
+                    <div class="header-icon header-icon-services">
+                        <a href="javascript:;" class="inner">
+                            <tw-img default-src="./assets/images/icon-service.png"></tw-img>
+                        </a>
+                    </div>
+                    <div class="logo">
+                        <a href="javascript:;" class="inner">
+                            <tw-img default-src="./assets/images/logo.png"></tw-img>
+                        </a>
+                    </div>
+                    <div class="header-icon header-icon-user">
+                        <a href="javascript:;" class="inner" @click="handleUserClick">
+                            <tw-img default-src="./assets/images/icon-user.png"></tw-img>
+                        </a>
+                    </div>
+                </div>
+            </header>
+
+            <!-- =========================================================================-->
+            <!-- 頁面內容  START-->
+            <!-- =========================================================================-->
+            <!-- 抽獎區塊:  NO刮刮乐、NO砸金蛋、NO摇钱树 -->
+            <section class="lottery_section">
+                <div class="container">
+                    <div
+                        class="lottery_section-inner"
+                        style="background-image: url(./assets/images/lottery_section-bg.png)">
+                        <div class="lottery_section-hd">
+                            <div class="txt">
+                                当前NO钱包积分<span class="txt-text-highlight">0</span><br />
+                                NO钱包充值<span class="txt-text-highlight">1</span>元,可获得<span
+                                    class="txt-text-highlight"
+                                    >1</span
+                                >积分
+                            </div>
+                        </div>
+
+                        <div class="lottery_section-bd">
+                            <div class="title">
+                                <tw-img
+                                    default-src="./assets/images/lottery_section-title.png"
+                                    alt="NO钱包福利站"></tw-img>
+                            </div>
+                            <div class="content">
+                                <!-- NO刮刮乐 -->
+                                <div class="content-block scratch_card-block">
+                                    <tw-img
+                                        class="img-scratch_card"
+                                        default-src="./assets/images/scratch_card-bg.png"></tw-img>
+                                    <tw-img
+                                        class="scratch_card-paper"
+                                        default-src="./assets/images/scratch_card-paper.png"></tw-img>
+                                    <tw-img
+                                        v-if="!isLogin"
+                                        class="scratch_card-btn"
+                                        default-src="./assets/images/scratch_card-btn.png"
+                                        @click="handleEnterDraw('scratch_card')"
+                                        alt="点我刮奖"></tw-img>
+                                    <tw-img
+                                        v-if="!isLogin"
+                                        class="scratch_card-hand"
+                                        default-src="./assets/images/scratch_card-hand.png"
+                                        alt="刮奖之手"></tw-img>
+
+                                    <!-- 開獎區 -->
+                                    <div v-if="isEnterScratchCard" class="scratch_card-area">
+                                        <div class="scratch_card-box">
+                                            <div class="scratch_card-content">
+                                                <tw-img
+                                                    class="scratch_card-img"
+                                                    default-src="./assets/images/scratch_card-get_bonus.png"></tw-img>
+                                            </div>
+                                            <div class="scratch_card-mask">
+                                                <canvas id="sc-cvs" class="scratch_card-canvas"></canvas>
+                                            </div>
+                                        </div>
+                                        <tw-img
+                                            class="scratch_card-cursor"
+                                            v-if="isEnterScratchCard"
+                                            default-src="./assets/images/scratch_card-hand.png"></tw-img>
+                                    </div>
+                                </div>
+                                <!-- NO砸金蛋 -->
+                                <div class="content-block smash_egg-block">
+                                    <tw-img
+                                        class="img-smash_egg"
+                                        default-src="./assets/images/smash_egg-bg.png"></tw-img>
+                                    <tw-img
+                                        class="smash_egg-btn"
+                                        default-src="./assets/images/smash_egg-btn.png"
+                                        @click="handleEnterDraw('smash_egg')"
+                                        alt="点我砸蛋"></tw-img>
+                                    <tw-img
+                                        class="smash_egg-hammer"
+                                        default-src="./assets/images/smash_egg-hammer.png"
+                                        alt="砸蛋之鎚"></tw-img>
+
+                                    <!-- 開獎區 -->
+                                    <div v-if="isEnterSmashEgg" class="smash_egg-cracks_glow-group">
+                                        <tw-img
+                                            class="smash_egg-cracks_glow cracks_glow-1"
+                                            default-src="./assets/images/cracks_glow-1.png"></tw-img>
+                                        <tw-img
+                                            class="smash_egg-cracks_glow cracks_glow-2"
+                                            default-src="./assets/images/cracks_glow-2.png"></tw-img>
+                                        <tw-img
+                                            class="smash_egg-cracks_glow cracks_glow-3"
+                                            default-src="./assets/images/cracks_glow-3.png"></tw-img>
+                                        <tw-img
+                                            class="smash_egg-cursor"
+                                            v-if="isEnterSmashEgg"
+                                            default-src="./assets/images/smash_egg-hammer.png"></tw-img>
+                                    </div>
+                                </div>
+                                <!-- NO摇钱树 -->
+                                <div class="content-block money_tree-block">
+                                    <tw-img
+                                        class="img-money_tree"
+                                        default-src="./assets/images/money_tree-bg.png"></tw-img>
+                                    <tw-img
+                                        v-if="!isEnterMoneyTree"
+                                        class="money_tree-btn"
+                                        default-src="./assets/images/money_tree-btn.png"
+                                        @click="handleEnterDraw('money_tree')"
+                                        alt="点我摇钱"></tw-img>
+                                    <tw-img
+                                        v-if="!isEnterMoneyTree"
+                                        class="money_tree-hand"
+                                        default-src="./assets/images/money_tree-hand.png"
+                                        alt="摇钱之手"></tw-img>
+
+                                    <!-- 開獎區 -->
+                                    <div class="money_tree-enter-group" :class="{'js-active': isEnterMoneyTree}">
+                                        <tw-img
+                                            class="layer1"
+                                            default-src="./assets/images/money_tree-layer1.png"></tw-img>
+
+                                        <tw-img
+                                            class="money_tree-leaves layer2-leaves-1"
+                                            default-src="./assets/images/money_tree-layer2-leaves-1.png"></tw-img>
+
+                                        <tw-img
+                                            class="money_tree-leaves layer2-leaves-2"
+                                            default-src="./assets/images/money_tree-layer2-leaves-2.png"></tw-img>
+
+                                        <tw-img
+                                            class="money_tree-leaves layer2-leaves-3"
+                                            default-src="./assets/images/money_tree-layer2-leaves-3.png"></tw-img>
+
+                                        <tw-img
+                                            class="money_tree-leaves layer2-leaves-4"
+                                            default-src="./assets/images/money_tree-layer2-leaves-4.png"></tw-img>
+
+                                        <tw-img
+                                            class="money_tree-leaves layer2-leaves-5"
+                                            default-src="./assets/images/money_tree-layer2-leaves-5.png"></tw-img>
+
+                                        <tw-img
+                                            class="money_tree-leaves layer2-leaves-6"
+                                            default-src="./assets/images/money_tree-layer2-leaves-6.png"></tw-img>
+
+                                        <tw-img
+                                            class="money_tree-leaves layer2-leaves-7"
+                                            default-src="./assets/images/money_tree-layer2-leaves-7.png"></tw-img>
+
+                                        <tw-img
+                                            class="layer3"
+                                            default-src="./assets/images/money_tree-layer3.png"></tw-img>
+
+                                        <tw-img
+                                            class="money_tree-red_envelopes layer4-1"
+                                            default-src="./assets/images/money_tree-layer4-1.png"></tw-img>
+
+                                        <tw-img
+                                            class="money_tree-red_envelopes layer4-2"
+                                            default-src="./assets/images/money_tree-layer4-2.png"></tw-img>
+
+                                        <tw-img
+                                            class="money_tree-red_envelopes layer4-3"
+                                            default-src="./assets/images/money_tree-layer4-3.png"></tw-img>
+
+                                        <tw-img
+                                            class="money_tree-red_envelopes layer4-4"
+                                            default-src="./assets/images/money_tree-layer4-4.png"></tw-img>
+
+                                        <tw-img
+                                            class="money_tree-red_envelopes layer4-5"
+                                            default-src="./assets/images/money_tree-layer4-5.png"></tw-img>
+
+                                        <tw-img
+                                            class="money_tree-red_envelopes layer4-6"
+                                            default-src="./assets/images/money_tree-layer4-6.png"></tw-img>
+
+                                        <tw-img
+                                            class="money_tree-red_envelopes layer4-7"
+                                            default-src="./assets/images/money_tree-layer4-7.png"></tw-img>
+
+                                        <tw-img
+                                            class="money_tree-red_envelopes layer4-8"
+                                            default-src="./assets/images/money_tree-layer4-8.png"></tw-img>
+                                    </div>
+                                    <tw-img
+                                        class="money_tree-cursor"
+                                        v-if="isEnterMoneyTree"
+                                        default-src="./assets/images/money_tree-hand.png"></tw-img>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="lottery_section-ft">
+                            <div class="btns">
+                                <tw-btn @click="changeCnt('scratch_card')">
+                                    <tw-img
+                                        default-src="./assets/images/btn-scratch_card.png"
+                                        alt="NO刮刮乐 50积分"></tw-img>
+                                </tw-btn>
+                                <tw-btn @click="changeCnt('smash_egg')">
+                                    <tw-img
+                                        default-src="./assets/images/btn-smash_egg.png"
+                                        alt="NO砸金蛋 500积分"></tw-img>
+                                </tw-btn>
+                                <tw-btn @click="changeCnt('money_tree')">
+                                    <tw-img
+                                        default-src="./assets/images/btn-money_tree.png"
+                                        alt="NO摇钱树 5000积分"></tw-img>
+                                </tw-btn>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="winner_section">
+                <div class="container">
+                    <div class="winner_section-inner">
+                        <div class="winner_section-hd">
+                            <ul class="tabs_list">
+                                <li class="tabs_item js-active" data-index="0">获奖公告</li>
+                                <li class="tabs_item" data-index="1">我的记录</li>
+                            </ul>
+                        </div>
+                        <div class="winner_section-bd">
+                            <div class="tabs_content">
+                                <div class="swiper">
+                                    <div class="swiper-wrapper">
+                                        <div class="swiper-slide">
+                                            <ul class="winner_list">
+                                                <!-- .winner_item 1 -->
+                                                <li class="winner_item">
+                                                    <div class="winner_item-col">
+                                                        <tw-img
+                                                            class="icon"
+                                                            default-src="./assets/images/logo-small.png"></tw-img>
+                                                        <div class="txt time">05-22 09:52</div>
+                                                    </div>
+                                                    <div class="winner_item-col">
+                                                        <div class="txt">9m**of在刮刮乐获得了of在刮刮乐获得了</div>
+                                                    </div>
+                                                    <div class="winner_item-col">
+                                                        <div class="txt-text-highlight2">88.00</div>
+                                                    </div>
+                                                </li>
+                                                <!-- /.winner_item END -->
+
+                                                <!-- .winner_item 2 -->
+                                                <li class="winner_item">
+                                                    <div class="winner_item-col">
+                                                        <tw-img
+                                                            class="icon"
+                                                            default-src="./assets/images/logo-small.png"></tw-img>
+                                                        <div class="txt time">05-22 09:52</div>
+                                                    </div>
+                                                    <div class="winner_item-col">
+                                                        <div class="txt">9m**of在刮刮乐获得了of在刮刮乐获得了</div>
+                                                    </div>
+                                                    <div class="winner_item-col">
+                                                        <div class="txt-text-highlight2">88.00</div>
+                                                    </div>
+                                                </li>
+                                                <!-- /.winner_item END -->
+
+                                                <!-- .winner_item 3 -->
+                                                <li class="winner_item">
+                                                    <div class="winner_item-col">
+                                                        <tw-img
+                                                            class="icon"
+                                                            default-src="./assets/images/logo-small.png"></tw-img>
+                                                        <div class="txt time">05-22 09:52</div>
+                                                    </div>
+                                                    <div class="winner_item-col">
+                                                        <div class="txt">9m**of在刮刮乐获得了of在刮刮乐获得了</div>
+                                                    </div>
+                                                    <div class="winner_item-col">
+                                                        <div class="txt-text-highlight2">88.00</div>
+                                                    </div>
+                                                </li>
+                                                <!-- /.winner_item END -->
+
+                                                <!-- .winner_item 4 -->
+                                                <li class="winner_item">
+                                                    <div class="winner_item-col">
+                                                        <tw-img
+                                                            class="icon"
+                                                            default-src="./assets/images/logo-small.png"></tw-img>
+                                                        <div class="txt time">05-22 09:52</div>
+                                                    </div>
+                                                    <div class="winner_item-col">
+                                                        <div class="txt">9m**of在刮刮乐获得了of在刮刮乐获得了</div>
+                                                    </div>
+                                                    <div class="winner_item-col">
+                                                        <div class="txt-text-highlight2">88.00</div>
+                                                    </div>
+                                                </li>
+                                                <!-- /.winner_item END -->
+
+                                                <!-- .winner_item 5 -->
+                                                <li class="winner_item">
+                                                    <div class="winner_item-col">
+                                                        <tw-img
+                                                            class="icon"
+                                                            default-src="./assets/images/logo-small.png"></tw-img>
+                                                        <div class="txt time">05-22 09:52</div>
+                                                    </div>
+                                                    <div class="winner_item-col">
+                                                        <div class="txt">9m**of在刮刮乐获得了of在刮刮乐获得了</div>
+                                                    </div>
+                                                    <div class="winner_item-col">
+                                                        <div class="txt-text-highlight2">88.00</div>
+                                                    </div>
+                                                </li>
+                                                <!-- /.winner_item END -->
+
+                                                <!-- .winner_item 6 -->
+                                                <li class="winner_item">
+                                                    <div class="winner_item-col">
+                                                        <tw-img
+                                                            class="icon"
+                                                            default-src="./assets/images/logo-small.png"></tw-img>
+                                                        <div class="txt time">05-22 09:52</div>
+                                                    </div>
+                                                    <div class="winner_item-col">
+                                                        <div class="txt">9m**of在刮刮乐获得了of在刮刮乐获得了</div>
+                                                    </div>
+                                                    <div class="winner_item-col">
+                                                        <div class="txt-text-highlight2">88.00</div>
+                                                    </div>
+                                                </li>
+                                                <!-- /.winner_item END -->
+                                            </ul>
+                                        </div>
+                                        <div class="swiper-slide">
+                                            <div class="no-data">
+                                                <tw-img default-src="./assets/images/no-data.png"></tw-img>
+                                                <div class="txt">暂无纪录</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="info_section">
+                <div class="container">
+                    <div class="info_section-inner" style="background-image: url(./assets/images/info_section-bg.png)">
+                        <div class="info_section-hd">
+                            <tw-img default-src="./assets/images/info_section-title.png" alt="活动细则"></tw-img>
+                        </div>
+                        <div class="info_section-bd">
+                            <p class="txt">
+                                1、所获得彩金 一倍流水 即可提款，仅限使用电子钱包提款；<br />
+                                2、活动仅限手机APP参与<br />
+                                <span class="txt-text-highlight3 d-block"
+                                    ><span class="special-txt">打开手机APP</span> >
+                                    <span class="special-txt">前往【优惠】</span> >
+                                    <span class="special-txt">点击NO福利站</span></span
+                                >
+                                进入活动页面，点击进行抽奖即可<br />
+                                3、会员每日使用【NO钱包】累计充值成功的金额，<span class="txt-text-highlight3"
+                                    >NO摇钱树5000积分/次，NO砸金蛋500积分/次，NO刮刮乐50积分/次；</span
+                                ><br />
+                                4、活动数据系统次日10:00自动更新，会员抽奖后3-10分钟-自动到账，请您耐心等待；<br />
+                                5、会员参与活动均由系统自动统计，若有任何异议，以皇冠集團查询结果为准；<br />
+                                6、如您忘记会员账号/密码，请您联系“7×24小时在线客服”协助您取回您账户的信息；<br />
+                                7、参与该优惠表示已同意《优惠规则与条款》
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <!-- =========================================================================-->
+            <!-- 頁面內容  END  !!-->
+            <!-- =========================================================================-->
+
+            <!-- 登入popup -->
+            <div class="popup popup-login" :class="{ 'popup-show': loginPopup }">
+                <div class="popup-wrap">
+                    <div class="popup-close" @click="loginPopup = false">
+                        <tw-img default-src="./assets/images/login-close.png"></tw-img>
+                    </div>
+                    <div class="popup-block" style="background-image: url(./assets/images/login-bg.png)">
+                        <form action="" class="login_form">
+                            <div class="login_form-field">
+                                <input
+                                    type="text"
+                                    class="login_form-controll"
+                                    placeholder="请输入平台会员帐号"
+                                    v-model="user_id" />
+                                <div class="user_id-error-msg" ref="userIdErrorMsg"></div>
+                            </div>
+                            <button type="button" class="login_form-btn" @click="handleLoginClick">
+                                <tw-img default-src="./assets/images/login-btn.png"></tw-img>
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <!-- 刮刮樂的獲獎popup -->
+            <div class="popup popup-bonus bonus-scratch_card" :class="{ 'popup-show': showBonusScratchCard }">
+                <div class="popup-wrap">
+                    <div class="popup-block" style="background-image: url(./assets/images/bonus-scratch_card-bg.png)">
+                        <div class="txt"><small>¥</small>5000</div>
+                        <button type="button" class="bonus-btn" @click="handleBonusConfirmClick('scratch_card')">
+                            <tw-img default-src="./assets/images/bonus-scratch_card-btn.png"></tw-img>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <!-- 砸金蛋的獲獎popup -->
+            <div class="popup popup-bonus bonus-smash_egg" :class="{ 'popup-show': showBonusSmashEgg }">
+                <div class="popup-wrap">
+                    <div class="popup-block" style="background-image: url(./assets/images/bonus-smash_egg-bg.png)">
+                        <div class="txt"><small>¥</small>5000</div>
+                        <button type="button" class="bonus-btn" @click="handleBonusConfirmClick('smash_egg')">
+                            <tw-img default-src="./assets/images/bonus-smash_egg-btn.png"></tw-img>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <!-- 搖錢樹的獲獎popup -->
+            <div class="popup popup-bonus bonus-money_tree" :class="{ 'popup-show': showBonusMoneyTree }">
+                <div class="popup-wrap">
+                    <div class="popup-block" style="background-image: url(./assets/images/bonus-money_tree-bg.png)">
+                        <div class="txt"><small>¥</small>5000</div>
+                        <button type="button" class="bonus-btn" @click="handleBonusConfirmClick('money_tree')">
+                            <tw-img default-src="./assets/images/bonus-money_tree-btn.png"></tw-img>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- /.body_wrap  END  !!-->
+        <!-- =========================================================================-->
+
+        <script src="./assets/plugin/lodash@4.17.21/lodash.min.js"></script>
+
+        <script src="./assets/plugin/gsap@3.12.5/gsap.min.js"></script>
+
+        <script src="./assets/plugin/swiper@11.1.1/swiper-bundle.min.js"></script>
+
+        <script src="./assets/vue@3.4.27/vue.global.prod.js"></script>
+        <script>
+            const { ref, reactive, createApp, onBeforeMount, onMounted, onUnmounted, watchEffect, watch, nextTick } =
+                Vue;
+        </script>
+        <script src="./assets/js/components/TwImg.js"></script>
+        <script src="./assets/js/components/TwBtn.js"></script>
+        <script src="./assets/js/winnerSwiper.js"></script>
+        <script src="./assets/js/scratchCardAni.js?v="></script>
+        <script src="./assets/js/enterScratchCard.js?v="></script>
+        <script src="./assets/js/scratchCardMaskImage.js?v="></script>
+        <!-- <script src="./assets/js/scratchCard.js?v="></script> -->
+        <script src="./assets/js/smashEggAni.js?v="></script>
+        <script src="./assets/js/moneyTreeAni.js?v="></script>
+        <script src="./assets/js/main.js?v="></script>
+    </body>
+</html>

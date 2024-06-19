@@ -1,0 +1,110 @@
+.tw-card  {
+    position: relative;
+    @include aspectRatioBox(320, 427);
+    max-width: 320px;
+    // aspect-ratio: 176 / 235;
+
+    border-radius: min-set-vw(20);
+    overflow: hidden;
+
+    box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
+    transition: box-shadow 0.3s ease-in-out;
+
+    .mask {
+        @include absolute(0, $L:0); 
+        z-index: 2;
+        @include wh;
+        background: linear-gradient(to bottom, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.4) 50%, rgba(0, 0, 0, 0.7));
+        transition: all 0.3s ease-in-out;
+        opacity: 0;
+    }
+
+    .repair_btn, .play_btn {
+        @include absolute(50%, $L:50%);
+        z-index: 3;
+        translate: -50% -50%;
+
+        @include wh(set-vw(80));
+        opacity: 0;
+        @extend %btn-active-effect;
+        pointer-events: none;
+        transition: opacity 0.3s ease-in-out;
+
+        [class*=icon-] {
+            aspect-ratio: 80 / 80;
+        }
+    }
+
+    &:hover {
+        box-shadow: 0 4px 16px rgba(0, 0, 0, 0.25);
+        .mask {
+            opacity: 1;
+        }
+
+        .play_btn {
+            opacity: 1;
+            pointer-events: all;
+        }
+
+        .game_img img {
+            scale: 1.05;
+        }
+    }
+    &-bar {
+        @include absolute($B:0, $L:0);
+        z-index: 3;
+
+        display: flex;
+        align-items: center;
+
+        width: 100%;
+        height: clamp(18px, set-vw(30), 30px);
+        padding-left: 12px;
+        padding-right: 12px;
+        background-color: var(--common-blue);
+        border-top: 2px solid #879CD1;
+        color: #C4D8FF;
+
+        .txt1 {
+            @include absolute();
+            bottom: clamp(18px, set-vw(30), 30px);
+            max-width: 60%;
+            // transform: translateY(calc(-100% - 5%));
+            color: #fff;
+            // font-size: min-set-vw(24);
+
+            font-size: responsive-clamp(20, 10);
+            @include media-down(768) {
+                font-size: px-to-rem(10);
+            }
+        }
+
+        .txt2 {
+            // font-size: min-set-vw(16);
+
+            font-size: responsive-clamp(16, 10);
+            @include media-down(768) {
+                font-size: px-to-rem(10);
+            }
+        }
+
+        .ribbon {
+            @include absolute($B:0, $R:set-vw(7));
+            width: 28%;
+            max-width: 40px;
+            cursor: pointer;
+
+            @extend %btn-active-effect;
+
+            .js-addToFav & {
+                .default {
+                    opacity: 0;
+                }
+                .hover {
+                    opacity: 1;
+                }
+            }
+        }
+    }
+
+}

@@ -1,0 +1,44 @@
+// @font-face {
+//     font-family: "Inter";
+//     src: url("../fonts/inter/static/Inter-Regular.ttf") format("opentype");
+//     font-weight: 400;
+// }
+
+// @font-face {
+//     font-family: "Inter";
+//     src: url("../fonts/inter/static/Inter-Medium.ttf") format("opentype");
+//     font-weight: 500;
+// }
+
+// @font-face {
+//     font-family: "Inter";
+//     src: url("../fonts/inter/static/Inter-SemiBold.ttf") format("opentype");
+//     font-weight: 600;
+// }
+
+// @font-face {
+//     font-family: "Inter";
+//     src: url("../fonts/inter/static/Inter-Bold.ttf") format("opentype");
+//     font-weight: 700;
+// }
+
+// @font-face {
+//     font-family: "Inter";
+//     src: url("../fonts/inter/static/Inter-Black.ttf") format("opentype");
+//     font-weight: 900;
+// }
+
+body {
+    // font-family: "Inter", sans-serif;
+    font-family: Microsoft JhengHei, Helvetica Neue, Helvetica, Segoe UI, Arial, Roboto, PingFang SC, miui, Hiragino Sans GB, sans-serif;
+    font-display: swap;
+    font-weight: 600;
+    // line-height: 1.5;
+    color: #686868;
+}
+
+@each $name, $color in $color {
+    .txt-#{$name} {
+        color: $color;
+    }
+}

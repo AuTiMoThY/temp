@@ -1,0 +1,48 @@
+{
+  "name": "download_page",
+  "version": "2.0",
+  "description": "",
+  "main": "gulpfile.js",
+  "type": "module",
+  "scripts": {
+    "start": "npm install"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "animate.css": "^4.1.1",
+    "bootstrap": "^5.3.3",
+    "countup.js": "^2.8.0",
+    "gsap": "^3.12.5",
+    "jquery": "^3.7.1",
+    "jquery.marquee": "^1.6.0",
+    "swiper": "^11.1.1"
+  },
+  "devDependencies": {
+    "autoprefixer": "^10.4.19",
+    "browser-sync": "^3.0.2",
+    "browserslist": "^4.23.0",
+    "gulp": "^5.0.0",
+    "gulp-cache": "^1.1.3",
+    "gulp-clean": "^0.4.0",
+    "gulp-if": "^3.0.0",
+    "gulp-imagemin": "^9.1.0",
+    "gulp-newer": "^1.4.0",
+    "gulp-nunjucks-render": "^2.2.3",
+    "gulp-plumber": "^1.2.1",
+    "gulp-postcss": "^10.0.0",
+    "gulp-prettier": "^6.0.0",
+    "gulp-sass": "^5.1.0",
+    "gulp-sass-glob": "^1.1.0",
+    "gulp-sass-vars": "^1.1.5",
+    "gulp-sourcemaps": "^3.0.0",
+    "imagemin-mozjpeg": "^10.0.0",
+    "imagemin-pngquant": "^10.0.0",
+    "sass": "^1.74.1"
+  },
+  "browserslist": [
+    "last 2 version",
+    "> 1%",
+    "IE 9"
+  ]
+}
