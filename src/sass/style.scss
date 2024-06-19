@@ -8,112 +8,27 @@
 @use "sass:math";
 @import "core";
 
-@mixin btn-hover-effect() {
-    transition:
-        background-color 0.3s ease-in-out,
-        box-shadow 0.3s ease-in-out,
-        color 0.3s ease-in-out,
-        border 0.3s ease-in-out,
-        text-shadow 0.3s ease-in-out;
+@import "generate/keyframes";
 
-    &:hover {
-        border: 1px solid var(--dark-blue);
-        background-color: var(--dark-blue);
-        box-shadow: 0px 0px 16px #{rgba(color(common-blue), 0.3)};
-        color: var(--theme-color);
-    }
-}
 
-@mixin btn-active-effect() {
-    &:active {
-        transform: translate(1px, 1px);
-    }
-}
-
-%btn-hover-effect {
-    @include btn-hover-effect();
-}
-
-%btn-active-effect {
-    @include btn-active-effect();
-}
-
-@keyframes enlarge {
-    from {
-        opacity: 1;
-    }
-
-    to {
-        opacity: 0;
-        width: calc(100% + 30px);
-        height: calc(100% + 30px);
-    }
-}
-
-@keyframes iconActiveEffect {
-    0% {
-        scale: 1;
-    }
-    
-    50% {
-        scale: 0.9;
-    }
-    
-    100% {
-        scale: 1;
-
-    }
-}
-
-// ********** COMPONENT START ********** //
-// /* ↓↓↓ ***** COMPONENT ***** ↓↓↓ */
+/* ↓↓↓ ***** COMPONENT START ***** ↓↓↓ */
 // @import "generate/components/tw_dropdown";
 @import "generate/components/tw_btn";
 @import "generate/components/tw_img";
 // @import "generate/components/tw_card";
 // @import "generate/components/tw_dropdown";
 // @import "generate/components/gotop";
-// /* ↑↑↑ ***** COMPONENT ***** ↑↑↑ */
+/* ↑↑↑ ***** COMPONENT END ***** ↑↑↑ */
 
-// ********** LAYOUT START ********** //
-/* ↓↓↓ ***** LAYOUT ***** ↓↓↓ */
+
+/* ↓↓↓ ***** LAYOUT START ***** ↓↓↓ */
 @import "frontend/layout/body_wrap";
 @import "frontend/layout/container";
 // @import "frontend/layout/tw_section";
-/* ↑↑↑ ***** LAYOUT ***** ↑↑↑ */
+/* ↑↑↑ ***** LAYOUT END ***** ↑↑↑ */
 
 
-$translateY: -55;
-$translateYp: -15%;
-:root {
-    --translate-y: #{$translateY};
-    --translate-y-p: #{$translateYp};
-}
-%common-element {
-    @include absolute();
-    left: 50%;
-    translate: -50% 0;
-}
-
-@import "frontend/entry/site_header";
-@import "frontend/entry/lottery_section";
-@import "frontend/entry/scratch_card";
-@import "frontend/entry/smash_egg";
-@import "frontend/entry/money_tree";
-@import "frontend/entry/winner_section";
-@import "frontend/entry/info_section";
-@import "frontend/entry/popup";
-@import "frontend/entry/login_form";
-@import "frontend/entry/bonus";
 
 
-/*!
- * animate.css - https://animate.style/
- * Version - 4.1.1
- * Licensed under the MIT license - http://opensource.org/licenses/MIT
- *
- * Copyright (c) 2020 Animate.css
- */
-@import "animate.css/source/_vars";
-@import "animate.css/source/_base";
-@import 'animate.css/source/attention_seekers/tada';
+/* animate.css - https://animate.style/ */
+@import "generate/animate";

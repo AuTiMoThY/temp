@@ -12,9 +12,9 @@
 @import "abstracts/variable/box_shadow";
 
 @import "bootstrap/scss/mixins";
-/* ↓↓↓ ***** bootstrap reboot ***** ↓↓↓ */
+/* ↓↓↓ ***** bootstrap reboot START ***** ↓↓↓ */
 @import "bootstrap/scss/reboot";
-/* ↑↑↑ ***** bootstrap reboot ***** ↑↑↑ */
+/* ↑↑↑ ***** bootstrap reboot END ***** ↑↑↑ */
 
 
 // ********** MIXIN & FUNCTIONS START ********** //
@@ -39,25 +39,18 @@
 @import "abstracts/mixin/twImg_hover";
 // @import "abstracts/mixin/popup_base";
 
-
-
-
-// ********** RESET START ********** //
-/* ↓↓↓ ***** reset ***** ↓↓↓ */
+/* ↓↓↓ ***** RESET START ***** ↓↓↓ */
 @import "generate/base/reset";
-/* ↑↑↑ ***** reset ***** ↑↑↑ */
+/* ↑↑↑ ***** RESET END ***** ↑↑↑ */
 
-// ********** ROOT START ********** //
-/* ↓↓↓ ***** root ***** ↓↓↓ */
+/* ↓↓↓ ***** ROOT START ***** ↓↓↓ */
 @import "generate/base/root";
-/* ↑↑↑ ***** root ***** ↑↑↑ */
+/* ↑↑↑ ***** ROOT END ***** ↑↑↑ */
 
-// ********** FONT START ********** //
-/* ↓↓↓ ***** font ***** ↓↓↓ */
+/* ↓↓↓ ***** FONT START ***** ↓↓↓ */
 @import "generate/base/font";
-/* ↑↑↑ ***** font ***** ↑↑↑ */
+/* ↑↑↑ ***** FONT END ***** ↑↑↑ */
 
-// ********** COMMON START ********** //
-/* ↓↓↓ ***** common ***** ↓↓↓ */
+/* ↓↓↓ ***** COMMON START ***** ↓↓↓ */
 @import "generate/base/common";
-/* ↑↑↑ ***** common ***** ↑↑↑ */
+/* ↑↑↑ ***** COMMON END ***** ↑↑↑ */

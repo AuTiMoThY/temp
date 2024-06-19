@@ -1,9 +1,6 @@
 .tw_btn {
     position: relative;
     display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 8px;
     // min-width: 100px;
     // height: 30px;
     // background-color: var(--common-blue);
@@ -18,21 +15,25 @@
     font-weight: 600;
     line-height: 1;
 
+    .inner {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 8px;
+    }
+
     .tw_img {
         transition: filter 0.3s ease-in-out;
     }
-    @include element-effect(true, true){
+    @include element-effect(true, true) {
         .tw_img {
             filter: saturate(2);
         }
-    };
+    }
     // @include media-down(1366) {
     //     min-width: 70px;
     //     height: 24px;
     // }
-
-
-
 
     &:before {
         content: "";
@@ -40,16 +41,28 @@
         inset: 0;
         background: radial-gradient(
                 circle at calc(var(--x) * 1px) calc(var(--y) * 1px),
-                hsla(0, 0%, 100%, 0.5),
+                hsla(0, 0%, 100%, 0.8),
                 transparent 5vmin
             ),
             transparent;
         background-attachment: fixed;
         pointer-events: none;
-        mask: linear-gradient(white, white) 50% 0 / 100% 2px no-repeat,
-            linear-gradient(white, white) 50% 100% / 100% 2px no-repeat,
-            linear-gradient(white, white) 0 50% / 2px 100% no-repeat,
-            linear-gradient(white, white) 100% 50% / 2px 100% no-repeat;
+        // mask: linear-gradient(white, white) 50% 0 / 100% 5px no-repeat,
+        //     linear-gradient(white, white) 50% 100% / 100% 5px no-repeat,
+        //     linear-gradient(white, white) 0 50% / 5px 100% no-repeat,
+        //     linear-gradient(white, white) 100% 50% / 5px 100% no-repeat;
+        
+        border-radius: 80px;
+        padding: 5px;
+        // background: linear-gradient(to right, #9c20aa, #fb3570);
+        -webkit-mask: 
+           linear-gradient(#fff 0 0) content-box, 
+           linear-gradient(#fff 0 0);
+                mask: 
+           linear-gradient(#fff 0 0) content-box, 
+           linear-gradient(#fff 0 0);
+        -webkit-mask-composite: xor;
+                mask-composite: exclude;
     }
 
     &:after {
@@ -58,22 +71,20 @@
         inset: 0;
         background: radial-gradient(
             circle at calc(var(--x) * 1px) calc(var(--y) * 1px),
-            hsla(0, 0%, 100%, 0.15),
+            hsla(0, 0%, 100%, 0.3),
             transparent 5vmin
         );
         background-attachment: fixed;
         opacity: var(--active, 0);
         transition: opacity 0.2s;
         pointer-events: none;
+        border-radius: 80px;
     }
 
     &:hover {
         --active: 1;
         text-decoration: none;
     }
-
-
-
 
     &-icon-prepend,
     &-icon-append {
@@ -84,5 +95,4 @@
     }
     &-icon-append {
     }
-
 }

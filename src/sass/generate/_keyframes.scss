@@ -1,0 +1,26 @@
+@keyframes enlarge {
+    from {
+        opacity: 1;
+    }
+
+    to {
+        opacity: 0;
+        width: calc(100% + 30px);
+        height: calc(100% + 30px);
+    }
+}
+
+@keyframes iconActiveEffect {
+    0% {
+        scale: 1;
+    }
+    
+    50% {
+        scale: 0.9;
+    }
+    
+    100% {
+        scale: 1;
+
+    }
+}
