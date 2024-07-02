@@ -1,17 +1,17 @@
 {
-  "name": "download_page",
+  "name": "template",
   "version": "2.0",
   "description": "",
   "main": "gulpfile.js",
   "type": "module",
   "scripts": {
-    "start": "npm install"
+    "dev": "gulp --dev",
+    "generate": "gulp --prod"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
     "animate.css": "^4.1.1",
-    "bootstrap": "^5.3.3",
     "countup.js": "^2.8.0",
     "gsap": "^3.12.5",
     "swiper": "^11.1.1"
