@@ -1,39 +1,60 @@
+{% set web_title="web title" %}
 <!doctype html>
 <html lang="en">
-    <head>
-        <title><% if page_title != '' %>[[ page_title ]] | <% endif %>web title</title>
-        <meta charset="UTF-8" />
-        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-        <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
 
-        <meta name="keywords" content="" />
-        <meta name="description" content="" />
-        <meta name="robots" content="noindex,nofollow" />
-        <!-- 讓手機不判斷它是電話號碼變顏色-->
-        <meta name="format-detection" content="telephone=no" />
+<head>
+    <title>
+        {% if page_title !='' %}[[ page_title ]] | {% endif %}[[web_title]]
+    </title>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
 
-        <link rel="stylesheet" href="[[ CSS_PATH ]]style.css<% if VERSION != '' %>?v=[[VERSION]]<% endif %>" />
+    <meta name="keywords" content="" />
+    <meta name="description" content="" />
+    <meta name="robots" content="noindex,nofollow" />
+    <!-- 讓手機不判斷它是電話號碼變顏色-->
+    <meta name="format-detection" content="telephone=no" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&display=swap"
+        rel="stylesheet">
 
-        <% block head_script %><% endblock %>
-    </head>
+    <link rel="stylesheet" href="[[ CSS_PATH ]]style.css{% if VERSION != '' %}?v=[[VERSION]]{% endif %}" />
 
-    <body class="">
-        <!-- ========================================================================= -->
-        <!-- .body_wrap  START-->
-        <div class="body_wrap" id="app">
-            <% block content %><% endblock %>
-        </div>
-        <!-- /.body_wrap  END  !!-->
-        <!-- =========================================================================-->
+    {% block head_script %}
+    {% endblock %}
+</head>
 
-        <script src="./assets/vue@3.4.27/vue.global<% if VERSION != '' %>.prod<% endif %>.js"></script>
-        <script>
-            const {ref, reactive, createApp, onBeforeMount, onMounted, onUnmounted, watchEffect, watch, nextTick} = Vue;
-        </script>
-        <script src="[[JS_PATH]]components/TwImg.js"></script>
-        <script src="[[JS_PATH]]components/TwBtn.js"></script>
+<body class="">
+    <!-- ========================================================================= -->
+    <!-- .body_wrap  START-->
+    <div class="body_wrap" id="app">
+        <div class="container"></div>
+        {% block content %}
+        {% endblock %}
+    </div>
+    <!-- /.body_wrap  END  !!-->
+    <!-- =========================================================================-->
 
-        <script src="[[JS_PATH]]main.js<% if VERSION != '' %>?v=[[VERSION]]<% endif %>"></script>
-        <% block page_script %><% endblock %>
-    </body>
+    <script src="./assets/vue@3.4.27/vue.global{% if VERSION != '' %}.prod{% endif %}.js"></script>
+    <script>
+        const { ref, reactive, createApp, onBeforeMount, onMounted, onUnmounted, watchEffect, watch, nextTick } = Vue;
+    </script>
+    <script src="[[JS_PATH]]components/TwImg.js"></script>
+    <script src="[[JS_PATH]]components/TwBtn.js"></script>
+
+    {% macro scriptWithVersion(path) %}
+        <script src="[[JS_PATH]][[ path ]]{% if VERSION != '' %}?v=[[VERSION]]{% endif %}"></script>
+    {% endmacro %}
+    [[ scriptWithVersion('TwTemp/core.js') ]]
+
+
+
+    <script src="[[JS_PATH]]main.js{% if VERSION != '' %}?v=[[VERSION]]{% endif %}"></script>
+    {% block page_script %}
+    {% endblock %}
+</body>
+
 </html>

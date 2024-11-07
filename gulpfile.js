@@ -6,14 +6,14 @@ import browserSyncPackage from "browser-sync";
 const sync = browserSyncPackage.create();
 
 import gulp from "gulp";
-const {src, dest, watch, series, parallel} = gulp;
+const { src, dest, watch, series, parallel } = gulp;
 import gulpIf from "gulp-if";
 import clean from "gulp-clean";
 import newer from "gulp-newer";
-import cache from 'gulp-cache';
+import cache from "gulp-cache";
 import imagemin from "gulp-imagemin";
-import imageminMozjpeg from 'imagemin-mozjpeg'; // 引入 imagemin-mozjpeg
-import imageminPngquant from 'imagemin-pngquant'; // 引入 imagemin-pngquant
+import imageminMozjpeg from "imagemin-mozjpeg"; // 引入 imagemin-mozjpeg
+import imageminPngquant from "imagemin-pngquant"; // 引入 imagemin-pngquant
 // import imageminSvgo from 'imagemin-svgo'; // 引入 imagemin-svgo
 // import imagemin, {gifsicle, mozjpeg, optipng, svgo} from 'gulp-imagemin';
 
@@ -30,7 +30,7 @@ import nunjucksRender from "gulp-nunjucks-render";
 import prettier from "gulp-prettier";
 
 import config from "./gulp.config.js";
-const {version, prodOutput, output} = config;
+const { version, prodOutput, output } = config;
 
 const args = process.argv.slice(2);
 const isProduction = args.includes("--prod");
@@ -44,12 +44,12 @@ const assetsPath = isProduction ? "./assets" : "./assets";
 // 自定義 Nunjucks 環境
 function manageEnvironment(environment) {
     environment.opts.tags = {
-        blockStart: "<%",
-        blockEnd: "%>",
+        // blockStart: "<%",
+        // blockEnd: "%>",
         variableStart: "[[",
-        variableEnd: "]]",
-        commentStart: "<#",
-        commentEnd: "#>",
+        variableEnd: "]]"
+        // commentStart: "<#",
+        // commentEnd: "#>",
     };
 
     // 添加一個名為 "random" 的過濾器，用於生成隨機數字
@@ -59,30 +59,28 @@ function manageEnvironment(environment) {
 }
 
 function generateCSS() {
-    return (
-        src(`${config.entryPath.sass}/**/*.scss`)
-            .pipe(
-                plumber(function (err) {
-                    console.log("SASS Compile Error:", err.message);
-                    this.emit("end");
-                }),
-            )
-            .pipe(sassVars(config.sassVar, {verbose: true}))
-            .pipe(sassGlob())
-            .pipe(sourcemaps.init())
-            .pipe(sass(config.sassOpt))
-            // .pipe(sass.sync().on('error', sass.logError))
-            .pipe(postcss([autoprefixer()]))
-            .pipe(sourcemaps.write("."))
-            .pipe(dest(`./public/assets/css`))
-            .pipe(gulpIf(isDevelopment, sync.stream()))
-            .on("end", () => {
-                console.log("=================================");
-                console.log(`generate CSS OK!`);
-                console.log("=================================");
-                // sync.reload();
+    return src(`${config.entryPath.sass}/**/*.scss`)
+        .pipe(
+            plumber(function (err) {
+                console.log("SASS Compile Error:", err.message);
+                this.emit("end");
             })
-    );
+        )
+        .pipe(sassVars(config.sassVar, { verbose: true }))
+        .pipe(sassGlob())
+        .pipe(sourcemaps.init())
+        .pipe(sass(config.sassOpt))
+        .pipe(sass.sync().on("error", sass.logError))
+        .pipe(postcss([autoprefixer()]))
+        .pipe(sourcemaps.write("."))
+        .pipe(dest(`./public/assets/css`))
+        .pipe(gulpIf(isDevelopment, sync.stream()))
+        .on("end", () => {
+            console.log("=================================");
+            console.log(`generate CSS OK!`);
+            console.log("=================================");
+            // sync.reload();
+        });
 }
 
 function nunjucksTask() {
@@ -93,7 +91,7 @@ function nunjucksTask() {
                 plumber(function (err) {
                     console.log("nunjucks Error:", err.message);
                     this.emit("end");
-                }),
+                })
             )
             // Renders template with nunjucks
             .pipe(
@@ -106,9 +104,9 @@ function nunjucksTask() {
                         IMG_PATH: `${assetsPath}/images/`,
                         CSS_PATH: `${assetsPath}/css/`,
                         JS_PATH: `${assetsPath}/js/`,
-                        VERSION: isProduction ? version : "",
-                    },
-                }),
+                        VERSION: isProduction ? version : ""
+                    }
+                })
             )
 
             .pipe(
@@ -116,8 +114,8 @@ function nunjucksTask() {
                     printWidth: 120,
                     tabWidth: 4,
                     bracketSameLine: true,
-                    proseWrap: "preserve",
-                }),
+                    proseWrap: "preserve"
+                })
             )
             // output files in app folder
             .pipe(dest(`${outputPath}`))
@@ -133,16 +131,23 @@ function nunjucksTask() {
 }
 
 function copyAssets() {
-    return src("public/assets/**/*", {encoding: false})
+    return src("public/assets/**/*", { encoding: false })
         .pipe(newer(`${prodOutput}/assets`))
-        .pipe(cache(imagemin([
-            imageminMozjpeg({ quality: 80, progressive: true }), // 壓縮 JPEG
-            imageminPngquant({ optimizationLevel: 5 }) // 壓縮 PNG
-        ], {
-            verbose: true
-        })))
+        .pipe(
+            cache(
+                imagemin(
+                    [
+                        imageminMozjpeg({ quality: 80, progressive: true }), // 壓縮 JPEG
+                        imageminPngquant({ optimizationLevel: 5 }) // 壓縮 PNG
+                    ],
+                    {
+                        verbose: true
+                    }
+                )
+            )
+        )
         .pipe(dest(`${prodOutput}/assets`))
-        .on("error", function(err) {
+        .on("error", function (err) {
             console.log("Error copying assets:", err.message);
         })
         .on("end", () => {
@@ -153,7 +158,10 @@ function copyAssets() {
 }
 
 function cleanProd() {
-    return src([`${prodOutput}`, `!${prodOutput}/assets/images/**`], {read: false, allowEmpty: true})
+    return src([`${prodOutput}`, `!${prodOutput}/assets/images/**`], {
+        read: false,
+        allowEmpty: true
+    })
         .pipe(clean())
         .on("end", () => {
             console.log("=================================");
@@ -165,12 +173,12 @@ function cleanProd() {
 function browserSync() {
     sync.init({
         ui: {
-            port: config.port,
+            port: config.port
         },
         server: {
-            baseDir: ["./dist", "./public"],
+            baseDir: ["./dist", "./public"]
         },
-        port: config.port,
+        port: config.port
     });
 
     console.log("=================================");

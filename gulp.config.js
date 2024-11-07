@@ -1,9 +1,9 @@
-const project = "154_sports_activity_europe";
-const version = "20240605";
+const project = "demo05-chess-dark";
+const version = "20240827";
 
-const entry = 'src';
-const output = 'dist';
-const prodOutput = 'dist_prod';
+const entry = "src";
+const output = "dist";
+const prodOutput = "dist_prod";
 
 // 使用 export default 導出配置物件
 export default {
@@ -14,17 +14,17 @@ export default {
     output: `./${output}`,
     prodOutput: `./${prodOutput}`,
     entryPath: {
-        sass: `./${entry}/sass`,
+        sass: `./${entry}/sass`
     },
     sassOpt: {
-        outputStyle: 'expanded',
-        includePaths: ['node_modules/']
+        outputStyle: "expanded",
+        includePaths: ["node_modules/"]
     },
     sassVar: {
         PROJECT_NAME: project,
         VERSION: version
     },
     njkOpt: {
-        PROJECT_NAME: project,
+        PROJECT_NAME: project
     }
 };

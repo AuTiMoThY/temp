@@ -1,4 +1,14 @@
 :root {
+    // --body-width: 100%;
+    --body-width: clamp(375px, 100%, 540px);
+
+    --container-width: #{relative-percentage(1920 - 90 * 2, 1920)};
+    @include media-down(1280) {
+        --body-width: clamp(375px, 100%, 540px);
+        --container-width: #{relative-percentage((375 - 16 * 2), 375)};
+    }
+}
+:root {
     --spacing: 104px;
     --spacing-half: calc(104px / 2);
 

@@ -8,8 +8,25 @@
 @use "sass:math";
 @import "core";
 
-@import "generate/keyframes";
+/* ↓↓↓ ***** bootstrap reboot ***** ↓↓↓ */
+@import "bootstrap/scss/bootstrap-reboot";
+/* ↑↑↑ ***** bootstrap reboot ***** ↑↑↑ */
 
+/* ↓↓↓ ***** RESET START ***** ↓↓↓ */
+@import "generate/base/reset";
+/* ↑↑↑ ***** RESET END ***** ↑↑↑ */
+
+/* ↓↓↓ ***** ROOT START ***** ↓↓↓ */
+@import "generate/base/root";
+/* ↑↑↑ ***** ROOT END ***** ↑↑↑ */
+
+/* ↓↓↓ ***** FONT START ***** ↓↓↓ */
+@import "generate/base/font";
+/* ↑↑↑ ***** FONT END ***** ↑↑↑ */
+
+/* ↓↓↓ ***** COMMON START ***** ↓↓↓ */
+@import "generate/base/common";
+/* ↑↑↑ ***** COMMON END ***** ↑↑↑ */
 
 /* ↓↓↓ ***** COMPONENT START ***** ↓↓↓ */
 // @import "generate/components/tw_dropdown";
@@ -20,6 +37,9 @@
 // @import "generate/components/gotop";
 /* ↑↑↑ ***** COMPONENT END ***** ↑↑↑ */
 
+/* ↓↓↓ ***** KEYFRAMES START ***** ↓↓↓ */
+@import "generate/keyframes";
+/* ↑↑↑ ***** KEYFRAMES END ***** ↑↑↑ */
 
 /* ↓↓↓ ***** LAYOUT START ***** ↓↓↓ */
 @import "frontend/layout/body_wrap";
@@ -27,8 +47,5 @@
 // @import "frontend/layout/tw_section";
 /* ↑↑↑ ***** LAYOUT END ***** ↑↑↑ */
 
-
-
-
 /* animate.css - https://animate.style/ */
-@import "generate/animate";
+// @import "generate/animate";
