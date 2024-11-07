@@ -1,17 +1,21 @@
 html, body {
     // font-size: 14px;
-
+    min-height: -webkit-fill-available;
 }
 
 html {
     background: linear-gradient(#121927 0%, #1a2234 50%);
-
+    @media screen and (max-width: 475px) {
+        height: 100%;
+        height: calc(var(--vh, 100vh));
+        overflow: hidden;
+    }
 }
 body {
-    width: clamp(320px, 100%, 750px);
-    min-height: 100vh;
+    width: var(--body-width);
+    min-height: 100dvh;
     margin: auto;
-    background-color: #f5f5f5;
+    // background-color: #f5f5f5;
 
     // @include media-down(490) {
     //     overflow: hidden;

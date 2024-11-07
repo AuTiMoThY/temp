@@ -18,8 +18,15 @@ const app = createApp({
         TwBtn,
     },
     setup() {
+        const setViewportHeight = () => {
+            let vh = window.innerHeight;
+            document.documentElement.style.setProperty("--vh", `${vh}px`);
+        };
         onMounted(() => {
-
+            // 初始設置視口高度
+            setViewportHeight();
+            // 監聽 resize 事件
+            window.addEventListener("resize", setViewportHeight);
         });
         onUnmounted(() => {
 
