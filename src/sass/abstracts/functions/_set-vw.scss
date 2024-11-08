@@ -10,6 +10,11 @@
     @return math.div($num, $base-width) * 100%;
 }
 
+@function to-pct($num, $base-width) {
+    @return math.div($num, $base-width) * 100%;
+}
+
+
 @function min-set-vw($num, $base-width) {
     @return min(set-vw($num, $base-width), #{$num}px);
 }
